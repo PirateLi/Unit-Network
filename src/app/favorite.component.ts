@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {StockD} from './detail.component';
-import { Subscription } from 'rxjs/Subscription';
+import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 import {Storage} from './storage.service';
 
