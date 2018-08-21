@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist/Unit-Network",
+      "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico"
