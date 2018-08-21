@@ -1,0 +1,22 @@
+<form  (click)="clickForm()" role="form" style="text-align:left;max-width:1300px;padding:2px;border-radius:6px;background-color:white">
+	<h3 align="center" style="margin:10px">Coin Market Search</h3>
+	<form #searchForm="ngForm" class="form-inline" class="row">
+	  <label for="input" style="font-size:14px;left:10px;margin:5px 0 15px 0" class="col-md-2  col-xs-12">Enter Symbol:<span style="color:red"> *</span></label>
+	  <div class="form-group"  class="col-md-6  col-xs-12" style="left:10px;margin:5px 0 15px 0">
+			<input id="input" class="form-control" #symbolInput required [(ngModel)]="inputSymbol" aria-label="stock_name" [formControl]="controller" placeholder="e.g AAPL" (keyup)="validate()">
+			<div *ngIf="((errorInput && clickF)||(controller.dirty || controller.touched) && errorInput)">
+			  Please enter a coin ticker symbol.
+			</div>
+	  </div>
+	  <div class="form-group"  style="left: 10px;margin:5px 0 15px 0;" class="col-md-4  col-xs-12">
+		<button type="button" class="btn btn-primary" (click)="getInfo(inputSymbol)" [disabled]="errorInput">
+			<i class="fa fa-search" aria-hidden="true"></i> Get Quote
+		</button>
+		<button type="button" class="btn btn-default" (click)="clear(); controller.reset()">
+			<i class="fa fa-refresh" aria-hidden="true"></i> Clear
+		</button>
+	  </div>
+	</form>
+</form>
+
+<hr style="width:95%;color:white">

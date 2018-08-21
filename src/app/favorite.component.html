@@ -1,0 +1,70 @@
+<div class="list-group">
+  <div style="background-color:rgb(234,234,234);display:flow-root;" class="list-group-item">
+    <span style="text-align:left;font-size:16px" class="pull-left">Favorite List</span>
+    <span class="pull-right">
+        <span class="hidden-xs hidden-sm">Automatic Refresh</span>
+		<!--auto-->
+        <span (click)="autoRe()"><input type="checkbox" data-toggle="toggle"></span>
+		
+        <button (click)="refreshFavo()" type="button" class="btn btn-default" aria-label="Left Align">
+          <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+        </button>
+        <button [disabled]="!goRight" type="button" class="btn btn-default" (click)="slideR()">
+          <i class="glyphicon glyphicon-menu-right"></i>
+        </button>
+    </span>
+  </div>
+  <div style="max-width:100%" class="list-group-item">
+    <div class="row">
+      <div class="col-md-1 col-xs-12 pull-left">
+        <span style="font-weight:bold">Sort by</span>
+      </div>
+      <div class="form-group col-md-3 col-xs-12 pull-left">
+        <select (change)="keyChange($event.target.value)" class="form-control">
+          <option>Default</option>
+          <option>Symbol</option>
+          <option>Price</option>	
+          <option>Change Percent</option>
+          <option>Volume</option>
+        </select>
+      </div>
+      <div class="col-md-1 col-xs-12 pull-left">
+        <span style="font-weight:bold">Order</span>
+      </div>
+      <div class="form-group col-md-3 col-xs-12 pull-left">
+        <select (change)="ascChange($event.target.value)" class="form-control" [disabled]="keyS=='default'">
+          <option>Ascending</option>
+          <option>Descending</option>
+        </select>
+      </div>
+    </div>
+    <div style="width:100%" class="table-responsive">
+      <table class="table" style="text-align:left">
+        <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Stock Price</th>
+          <th>1H Change</th>
+          <th>24H Volume</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of favData">
+            <tr>
+              <th scope="row"><a (click)="search(data['symbol'])">{{data.symbol}}</a></th>
+              <td>{{data.quotes.USD.price}}</td>
+              <td [ngClass]="{'red': (data.quotes.USD.percent_change_1h)[0]=='-', 'green': (data.quotes.USD.percent_change_1h)[0]!='-'}">
+			    {{data.quotes.USD.percent_change_1h}}
+			  </td>
+              <td>{{data.quotes.USD.volume_24h}}</td>
+              <td>
+                <button (click)="remStar(data['symbol'])" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

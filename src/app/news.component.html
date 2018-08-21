@@ -1,0 +1,29 @@
+<div>
+	<div [hidden]="newsStatus != 'wait'" class="progress" id="newsInfo_progress">
+	<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div *ngIf="newsStatus=='ok'">
+	<div *ngFor="let news of newsData">
+	  <div [hidden]="newsStatus!='ok'" style="background-color:lightgray;text-align:left;padding:20px;margin:10px;border-radius:6px">
+		<div>	
+			<p><a target="_blank" href={{news.link}}>{{news.title}}</a></p>
+			<div class="newsContent" style="margin:20px 0 20px 0">
+			<p>Author:  {{news.author}}</p>
+			<p>Date: {{news.pubDate}} </p>
+			</div>
+		</div>
+		</div>
+		<div [hidden]="newsStatus!='wait'" class="progress">
+		<div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+		</div>	
+		
+		</div>
+	</div>
+	</div>
+	<div class="error-alert" [hidden]="newsStatus!='fail'">
+		<div class="alert alert-danger" role="alert">
+		Error! Failed to get news data.
+		</div>
+	</div>	
+
+</div>

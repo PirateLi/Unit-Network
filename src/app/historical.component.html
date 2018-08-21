@@ -1,0 +1,11 @@
+<div style="width:100%">
+	<div [hidden]="hisStatus!='wait'" class="progress" >
+		<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div [hidden]="hisStatus!='ok'" id="testHighchart" style="width:100%"></div>
+	<div class="error-alert" [hidden]="hisStatus!='fail'">
+		<div class="alert alert-danger" role="alert">
+			Error! Failed to get MACD data.
+		</div>
+	</div>
+</div>
