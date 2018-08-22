@@ -32,7 +32,7 @@ export class Storage {
 	//BASIC INFO
 	private stockBasic=new Subject<any>();
 	stockBasic$=this.stockBasic.asObservable();
-	private basicInfoApi="http://localhost:3000/api/info?";
+	private basicInfoApi="https://morning-plateau-97808.herokuapp.com/api/info?";
 	getBasicInfo(stock_name: string)
 	{
 		var params = new HttpParams().set('symbol', stock_name);

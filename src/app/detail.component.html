@@ -29,12 +29,12 @@
           <div class="col-md-6">
 			<!--STAR-->
             <div class="pull-right" style="display:flex; justify-content:center">
-			<span [hidden]="inFavo=='in'" >
+			<span [hidden]="infoStatus!='ok' || inFavo=='in'" >
 				<button  [disabled]="infoStatus!='ok'" type="button" class="btn btn-default" style="padding:2px;width:40px;height:40px;text-align:center" (click)="addFavo()"> 
 				<span  class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 				</button>
 			</span>
-			<span [hidden]="inFavo!='in'">
+			<span [hidden]="infoStatus!='ok' || inFavo!='in'">
 					<button [disabled]="infoStatus!='ok'" type="button" class="btn btn-default" style="padding:2px;width:40px;height:40px;text-align:center" (click)="delFavo()">
 					<span  style="color:yellow" class="glyphicon glyphicon-star" aria-hidden="true"></span>
 					</button>
