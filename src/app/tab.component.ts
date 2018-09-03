@@ -9,8 +9,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import {Subscription} from 'rxjs/Subscription';
-import {Historical} from './historical.component'
+import {Subscription} from 'rxjs/Subscription';	
 import {Storage} from './storage.service';
 import HighchartsExporting = require('highcharts/modules/exporting');
 import * as Highstock from 'highcharts/highstock';

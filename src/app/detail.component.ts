@@ -36,7 +36,8 @@ export class StockD implements OnDestroy {
 	idxData: Object;
 	curIdx: string;
 	curTab: string;
-
+	imgSrc: string;
+	
 	priceD:any;
 	priceChart:Object;
 	indStore: Object = new Object();
@@ -80,6 +81,9 @@ export class StockD implements OnDestroy {
 			}
 			this.autoUpdate(data["symbol"]);
 			this.basicData = data;
+			this.imgSrc = "assets/icons/"+data["id"]+".png";
+			var date = new Date(data["last_updated"] * 1000);
+			this.basicData["date"] = date.toLocaleString();
 			var localData=localStorage.getItem("favorite");
 			var localObj= new Object();
 			localObj=JSON.parse(localData);

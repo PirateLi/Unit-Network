@@ -51,12 +51,18 @@ export class AutoC implements OnInit {
 	{
 		this.clickF=true;
 	}
-	validate()
+	
+	validate(e: any)
 	{
 		if(!this.controller.value.trim())
 			this.errorInput= true;
-		else
+		else {
+			var keycode = window.event?e.keyCode:e.which;
+			if(keycode==13){
+				this.getInfo(this.inputSymbol);
+			}
 			this.errorInput= false;
+		}
 	}
 	
 	filter(val: string): any[] {

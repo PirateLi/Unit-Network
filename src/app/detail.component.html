@@ -11,20 +11,11 @@
   </div>
 
   <div style="max-width:100%" class="list-group-item">
-    <ul class="nav nav-pills list-inline">
-      <li [ngClass]="{'active': curTab=='basic'}" (click)="tabBasic()">
-        <a href="javascript:void(0);">	
-          <span class="glyphicon glyphicon-time"></span>
-          <span class="visable">Current</span> Coin</a>
-      </li>
-    </ul>
-	<hr style="width:95%;color:lightgray">
-	<div style="margin:20px 0">
     <div [hidden]="curTab != 'basic'" class="row">
       <div  class="col-md-12" style="margin:15px 0">
         <div class="row" style="margin:2px; justify-content:center">
           <span class="col-md-6 pull-left" style="text-align:left" *ngIf="infoStatus=='ok'">
-            <h2>{{ basicData.symbol }}</h2>
+            <div style="display:inline-block"><img src={{imgSrc}} style="float:left" width="20px" height="20px"></div><div style="display:inline-block"><p style="float:left;margin:0;font-size:25px">{{ basicData.symbol }}</p></div><div style="display:inline-block"><p style="float:left;margin:0;font-size:16px">&nbsp;&nbsp;{{ basicData.name }}</p><p style="float:left;margin:0;font-size:16px">&nbsp;&nbsp;{{ basicData.date }}</p></div>
           </span>
           <div class="col-md-6">
 			<!--STAR-->
@@ -49,7 +40,7 @@
         </div>
 		<div class="error-alert" [hidden]="infoStatus!='fail'">
 				<div class="alert alert-danger" role="alert">
-					Error! Failed to get current stock data.
+					Error! Failed to get current coin data.
 				</div>
 		</div>
 		<div style="width:100%" class="table-responsive">
@@ -84,18 +75,10 @@
 			</table>
 		</div>
       </div>
-	  <div  class="col-md-12" style="margin:15px 0;z-index:1">
-		<iframe src="https://unitnetwork-dash.herokuapp.com/" name="myframe" width="100%" height="1500" 
+	  <div  class="col-md-12" style="z-index:1">
+		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="3650" 
 		scrolling="no" frameborder="0" id="myframe" border="0" ></iframe>
 	  </div>
-	</div>
-    <!-- Historical Chart-->
-    <div [hidden]="curTab != 'history'" class="row" style="padding:3%">
-		<historical></historical>
-    </div>
-	<!--News-->
-	<div [hidden]="curTab!='news'" class="row">
-		<news></news>
 	</div>
 
     </div>

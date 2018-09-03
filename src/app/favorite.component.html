@@ -43,9 +43,10 @@
         <thead>
         <tr>
           <th>Symbol</th>
-          <th>Stock Price</th>
+          <th>Price</th>
           <th>1H Change</th>
           <th>24H Volume</th>
+		  <th>Market Cap</th>
           <th></th>
         </tr>
         </thead>
@@ -58,6 +59,7 @@
 			    {{data.quotes.USD.percent_change_1h}}
 			  </td>
               <td>{{data.quotes.USD.volume_24h}}</td>
+			  <td>{{data.quotes.USD.market_cap}}</td>
               <td>
                 <button (click)="remStar(data['symbol'])" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
               </td>

@@ -14,21 +14,7 @@ export class Storage {
 	
 
 	constructor(private http: HttpClient){};
-	
-	//HISTORY
-	private historicalData = new Subject<any>();
-	historicalData$=this.historicalData.asObservable();
-	private historicalApi="http://angular2-env.92hivcqzt8.us-west-1.elasticbeanstalk.com/api/price?";	
-	getHistoricalData(stock_name: string)
-	{
-		const params = new HttpParams().set('symbol', stock_name);
-		this.http.get(this.historicalApi, {params}).subscribe(
-			data => {
-				this.historicalData.next(data);
-			}
-		);
-	}
-	
+
 	//BASIC INFO
 	private stockBasic=new Subject<any>();
 	stockBasic$=this.stockBasic.asObservable();
@@ -39,43 +25,6 @@ export class Storage {
 		this.http.get(this.basicInfoApi, {params}).subscribe(
 			data => {
 				this.stockBasic.next(data);
-			}
-		);
-	}
-	
-	//INDEX	
-	indData:Object = new Object();
-	private indexData = new Subject<any>();
-	indexData$=this.indexData.asObservable();	
-	private indexApi="http://angular2-env.92hivcqzt8.us-west-1.elasticbeanstalk.com/api/index?";
-	idx=["SMA", "EMA", "STOCH", "RSI", "ADX", "CCI", "BBANDS", "MACD"];
-	getIndex(stock_name: string)
-	{
-		console.log("getIndex");
-		var cnt=0;
-		for (var x in this.idx)
-		{
-			var params = new HttpParams().set('symbol', stock_name).set('ind', this.idx[x]);
-			this.http.get(this.indexApi, {params}).subscribe(
-				data => {
-					cnt++;
-					this.setIdx(data);
-				}
-			);			
-		}
-	}
-	
-	
-	//NEWS
-	private stockNews = new Subject<any>();
-	stockNews$ = this.stockNews.asObservable();
-	private newsApi="http://angular2-env.92hivcqzt8.us-west-1.elasticbeanstalk.com/api/news?";
-	getNews(stock_name: string)
-	{
-		var params = new HttpParams().set('symbol', stock_name);
-		this.http.get(this.newsApi, {params}).subscribe(
-			newsData => {
-				this.stockNews.next(newsData);
 			}
 		);
 	}
@@ -113,11 +62,6 @@ export class Storage {
 		this.delFavo.next(delData);
 	}
 	
-	setIdx(data:any)
-	{
-		this.indexData.next(data);
-	}
-	
 	refreshFavo()
 	{
 		var localData=localStorage.getItem("favorite");		
@@ -126,14 +70,12 @@ export class Storage {
 		{
 			return;
 		}
-		console.log(localData);
 		var newObj=new Object();
 		for (var obj in localObj)
 		{
 			var params = new HttpParams().set('symbol', localObj[obj]['symbol']);
 			this.http.get(this.basicInfoApi, {params}).subscribe(
 				data => {
-					console.log(data);
 					this.addFavo(data);
 				}
 			);

@@ -10,9 +10,7 @@ import {AppComponent} from './app.component';
 import {Tabs} from './tab.component';
 import {AutoC} from './autoc.component';
 import {FavoriteL} from './favorite.component'
-import {Historical} from './historical.component';
 import {StockD} from './detail.component';
-import {News} from './news.component';
 import * as highcharts from 'highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
@@ -24,10 +22,8 @@ export function highchartsFactory() {
     AppComponent,
 	AutoC,
 	Tabs,
-	Historical,
 	FavoriteL,
 	StockD,
-	News
   ],
   imports: [
     BrowserModule,

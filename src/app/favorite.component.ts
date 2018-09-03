@@ -27,24 +27,14 @@ export class FavoriteL {
 		this.goRight=false;
 		var localData=localStorage.getItem("favorite");
 		this.favData = [];
-		this.localObj=JSON.parse(localData);
-		for (var obj in this.localObj)
-		{
-			this.favData.push(this.localObj[obj]);
-		}
 		this.hasData = false;
+		this.Storage.refreshFavo();
 	}
 	
 	constructor(private Storage: Storage){
 		this.clearSub=Storage.clearMsg$.subscribe(
 			data=>{
 				this.ngOnInit();
-			}
-		);
-		
-		this.enableR=Storage.stockNews$.subscribe(
-			data=>{
-				this.goRight=true;
 			}
 		);
 		
@@ -64,7 +54,12 @@ export class FavoriteL {
 				this.favData=[];
 				for (var obj in newObj)
 				{
-					this.favData.push(newObj[obj]);
+					if (newObj[obj]["symbol"] != null){
+						this.favData.push(newObj[obj]);
+					}
+					else {
+						delete newObj[obj];
+					}
 				}
 				if (this.favData.length)
 					this.hasData = true;
@@ -86,8 +81,7 @@ export class FavoriteL {
 				delete this.localObj[data];
 
 				this.favData=[];
-				for (var obj in this.localObj)
-				{
+				for (var obj in this.localObj) {
 					this.favData.push(this.localObj[obj]);
 				}
 				if (!this.favData.length)
