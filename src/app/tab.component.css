@@ -1,5 +1,5 @@
-.favo{  max-width: 1300px;  margin:auto}
-.info{  max-width: 1300px;  margin:auto}
+.favo{margin:auto}
+.info{margin:auto}
 @media(max-width: 990px) {
   .visable{
     display:none;
