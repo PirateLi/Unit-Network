@@ -75,7 +75,7 @@
 			</table>
 		</div>
       </div>
-	  <div  class="col-md-12" style="z-index:1">
+	  <div  *ngIf="infoStatus=='ok' && basicData['symbol']=='EOS'" class="col-md-12" style="z-index:1">
 		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="3680" 
 		scrolling="no" frameborder="0" id="myframe" border="0" ></iframe>
 	  </div>
