@@ -23,7 +23,7 @@ const CoinMarketCapListApi= "https://api.coinmarketcap.com/v2/listings/";
 const Convert = ["USD"];
 const ToLocaleString = ["volume_24h", "market_cap"];
 const PercentChange = ["percent_change_1h", "percent_change_24h", "percent_change_7d"];
-var startId = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]//[1, 233, 659, 1070, 1343, 1552, 1714, 1843, 1983, 2100, 2235 2350, 2458, 2560, 2664, 2767, 2916, 2916, 3019];
+var startId = [1, 233, 659, 1070, 1343, 1552, 1714, 1843, 1983, 2100, 2235, 2350, 2458, 2560, 2664, 2767, 2916, 2916, 3019];
 
 var mapping = readMap();
 
@@ -44,10 +44,7 @@ router.get('/info', (req, res) => {
 	
 	const symbolId = mapping[symbol];
 	for (i = 0; i <= 18; i++) {
-		if (i == 18 || (symbolId >= startId[i] && symbolId < startId[i + 1])){
-			queryMarcketCap(i, symbol, res);
-			return;
-		}
+		queryMarcketCap(i, symbol, res);
 	}
 });
 
@@ -107,9 +104,7 @@ function queryMarcketCap(idx, symbol, res){
 				res.send(data);
 			}
 			else{
-				updateStartId();
-				var error = genError(2);
-				res.send(error);
+				return;
 			}
 		}
 	});	
@@ -141,11 +136,9 @@ function updateMappingFile() {
 }
 
 var ruleCoinList  = new schedule.RecurrenceRule();
-var timesCoinList = [1, 7, 13, 19];
+var timesCoinList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 ruleCoinList.hour  = timesCoinList; ruleCoinList.minute = 0;
 schedule.scheduleJob(ruleCoinList, function() {
-	console.log("1");
-	updateStartId();
 	updateMappingFile();
 });
 
