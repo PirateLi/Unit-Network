@@ -60,15 +60,15 @@
 				  <td>{{ basicData.quotes.USD.market_cap }}</td>
 				  <td [ngClass]="{'red': (basicData.quotes.USD.percent_change_1h)[0]=='-'
 					, 'green': (basicData.quotes.USD.percent_change_1h)[0]!='-'}">
-					{{ basicData.quotes.USD.percent_change_1h}}<img *ngIf="(basicData.quotes.USD.percent_change_1h)[0]!=='-'" src="assets/arrow_up.png" width="18px" height="18px"><img *ngIf="(basicData.quotes.USD.percent_change_1h)[0]=='-'" src="assets/arrow_down.png" width="18px" height="18px">
+					{{ basicData.quotes.USD.percent_change_1h}}<img *ngIf="(basicData.quotes.USD.percent_change_1h)[0]!=='-'" src="assets/arrow_up.png" width="16px" height="16px"><img *ngIf="(basicData.quotes.USD.percent_change_1h)[0]=='-'" src="assets/arrow_down.png" width="16px" height="16px">
 				  </td>
 				  <td [ngClass]="{'red': (basicData.quotes.USD.percent_change_24h)[0]=='-'
 					, 'green': (basicData.quotes.USD.percent_change_24h)[0]!='-'}">
-					{{ basicData.quotes.USD.percent_change_24h}}<img *ngIf="(basicData.quotes.USD.percent_change_24h)[0]!=='-'" src="assets/arrow_up.png" width="18px" height="18px"><img *ngIf="(basicData.quotes.USD.percent_change_24h)[0]=='-'" src="assets/arrow_down.png" width="18px" height="18px">
+					{{ basicData.quotes.USD.percent_change_24h}}<img *ngIf="(basicData.quotes.USD.percent_change_24h)[0]!=='-'" src="assets/arrow_up.png" width="16px" height="16px"><img *ngIf="(basicData.quotes.USD.percent_change_24h)[0]=='-'" src="assets/arrow_down.png" width="16px" height="16px">
 				  </td>
 				  <td [ngClass]="{'red': (basicData.quotes.USD.percent_change_7d)[0]=='-'
 					, 'green': (basicData.quotes.USD.percent_change_7d)[0]!='-'}">
-					{{ basicData.quotes.USD.percent_change_7d}}<img *ngIf="(basicData.quotes.USD.percent_change_7d)[0]!=='-'" src="assets/arrow_up.png" width="18px" height="18px"><img *ngIf="(basicData.quotes.USD.percent_change_7d)[0]=='-'" src="assets/arrow_down.png" width="18px" height="18px">
+					{{ basicData.quotes.USD.percent_change_7d}}<img *ngIf="(basicData.quotes.USD.percent_change_7d)[0]!=='-'" src="assets/arrow_up.png" width="16px" height="16px"><img *ngIf="(basicData.quotes.USD.percent_change_7d)[0]=='-'" src="assets/arrow_down.png" width="16px" height="16px">
 				  </td>
 				</tr>
 			  </tbody>
@@ -76,7 +76,7 @@
 		</div>
       </div>
 	  <div  *ngIf="infoStatus=='ok' && basicData['symbol']=='EOS'" class="col-md-12" style="z-index:1">
-		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="3680" 
+		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="4000" 
 		scrolling="no" frameborder="0" id="myframe" border="0" ></iframe>
 	  </div>
 	</div>
