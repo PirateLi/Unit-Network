@@ -54,12 +54,12 @@
           <ng-container *ngFor="let data of favData">
             <tr>
               <th scope="row"><a (click)="search(data['symbol'])">{{data.symbol}}</a></th>
-              <td>{{data.quotes.USD.price}}</td>
+              <td>${{data.quotes.USD.price}}</td>
               <td [ngClass]="{'red': (data.quotes.USD.percent_change_1h)[0]=='-', 'green': (data.quotes.USD.percent_change_1h)[0]!='-'}">
 			    {{data.quotes.USD.percent_change_1h}}<img *ngIf="(data.quotes.USD.percent_change_1h)[0]!=='-'" src="assets/arrow_up.png" width="16px" height="16px"><img *ngIf="(data.quotes.USD.percent_change_1h)[0]=='-'" src="assets/arrow_down.png" width="16px" height="16px">
 			  </td>
-              <td>{{data.quotes.USD.volume_24h}}</td>
-			  <td>{{data.quotes.USD.market_cap}}</td>
+              <td>${{data.quotes.USD.volume_24h}}</td>
+			  <td>${{data.quotes.USD.market_cap}}</td>
               <td>
                 <button (click)="remStar(data['symbol'])" type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
               </td>

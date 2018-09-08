@@ -153,7 +153,9 @@ export class StockD implements OnDestroy {
 			}
 		});
 	}
-	
+	tabHighchart() {
+		this.curTab = "highchart";
+	}
 	tabBasic()
 	{
 		this.curTab = "basic";
