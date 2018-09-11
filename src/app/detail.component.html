@@ -10,8 +10,8 @@
     </span>
   </div>
 
-  <div class="list-group-item" [hidden]="infoStatus!='ok' || basicData['symbol']!='EOS'">
-      <ul class="nav nav-pills list-inline">
+  <div class="list-group-item">
+      <ul class="nav nav-pills list-inline" *ngIf="basicData['symbol']=='EOS'">
       <li [ngClass]="{'active': curTab=='basic'}" (click)="tabBasic()">
         <a href="javascript:void(0);">
           <span class="glyphicon glyphicon-time"></span>
@@ -89,7 +89,7 @@
 		</div>
       </div>
 	  <div  *ngIf="infoStatus=='ok' && basicData['symbol']=='EOS' && curTab=='basic'" class="col-md-12" style="z-index:1">
-		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="4300" 
+		<iframe src="https://unitnetwork-dash.herokuapp.com/eos" name="myframe" width="100%" height="3900px" 
 		scrolling="no" frameborder="0" id="myframe" border="0" ></iframe>
 	  </div>
 	  <div  [hidden]="infoStatus!='ok' || basicData['symbol']!='EOS' || curTab!='highchart'" class="col-md-12" style="height:400px" id="container1"></div>
