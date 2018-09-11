@@ -1,5 +1,5 @@
 <div class="list-group">
-  <div style="background-color:rgb(235,235,235);display:flow-root;text-align:center" class="list-group-item">
+  <div class="list-group-item" style="background-color:rgb(235,235,235);display:flow-root;text-align:center;height:56px;">
     <span class="pull-left">
       <button href="#myCarousel" data-slide="next" type="button" class="btn btn-default" (click)="slideL()">
         <span class="glyphicon glyphicon-menu-left"></span>
@@ -10,7 +10,7 @@
     </span>
   </div>
 
-  <div class="list-group-item">
+  <div class="list-group-item" [hidden]="infoStatus!='ok' || basicData['symbol']!='EOS'">
       <ul class="nav nav-pills list-inline">
       <li [ngClass]="{'active': curTab=='basic'}" (click)="tabBasic()">
         <a href="javascript:void(0);">
