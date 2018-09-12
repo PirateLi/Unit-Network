@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>Unit Network</title><base href="https://pirateli.github.io/Unit-Network/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css"><link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"><!-- Latest compiled and minified CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><!-- Optional theme --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"><link href="styles.01a7acd53912320d07ae.bundle.css" rel="stylesheet"/></head><body style="margin:0"><div id="container"><app-root>Loading...</app-root></div><!-- Latest compiled and minified JavaScript --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script><script type="text/javascript" src="inline.12ede0ac8aa2f8571196.bundle.js"></script><script type="text/javascript" src="polyfills.bf6f202bc04b6ec9db66.bundle.js"></script><script type="text/javascript" src="main.3578beb8da0276b475d6.bundle.js"></script></body></html><script src="https://code.highcharts.com/stock/highstock.js"></script><script src="https://code.highcharts.com/stock/modules/exporting.js"></script><script src="https://code.highcharts.com/stock/modules/export-data.js"></script><script src="https://code.jquery.com/jquery-1.10.2.js"></script><script>window.fbAsyncInit = function() {
+<!DOCTYPE html><html><head><title>Unit Network</title><base href="https://pirateli.github.io/Unit-Network/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css"><link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"><!-- Latest compiled and minified CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><!-- Optional theme --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"><link href="styles.01a7acd53912320d07ae.bundle.css" rel="stylesheet"/></head><body style="margin:0"><div id="container"><app-root>Loading...</app-root></div><!-- Latest compiled and minified JavaScript --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script><script type="text/javascript" src="inline.c846aff6c62a286dfc25.bundle.js"></script><script type="text/javascript" src="polyfills.bf6f202bc04b6ec9db66.bundle.js"></script><script type="text/javascript" src="main.00fd506cb111c5e47805.bundle.js"></script></body></html><script src="https://code.highcharts.com/stock/highstock.js"></script><script src="https://code.highcharts.com/stock/modules/exporting.js"></script><script src="https://code.highcharts.com/stock/modules/export-data.js"></script><script src="https://code.jquery.com/jquery-1.10.2.js"></script><script>window.fbAsyncInit = function() {
     FB.init({
       appId            : '529056017456647',
       autoLogAppEvents : true,
@@ -27,8 +27,24 @@
         }
     });
 
+    var price_series = [],
+        volume_series = [],
+        seriesCounter = 0,
+        names = ['Binance', 'Huobi', 'OKEX'];
+
+
+    Highcharts.setOptions({
+        time: {
+            timezoneOffset: new Date().getTimezoneOffset(),
+        },
+        lang: {
+            numericSymbols: ['W', 'Y', '10Y'],
+            numericSymbolMagnitude: 10000,
+        }
+    });
+
     function createChart() {
-        Highcharts.stockChart('container1', {
+        Highcharts.stockChart('price-container', {
             chart: {
                 marginRight: 60,
                 events: {
@@ -126,7 +142,112 @@
                 split: true
             },
 
-            series: seriesOptions
+            series: price_series,
+        });
+
+        Highcharts.stockChart('volume-container', {
+            chart: {
+                marginRight: 85,
+                events: {
+                    load: function () {
+                        var series = this.series;
+                        console.log(this);
+                        var chart = this;
+                        // console.log(series[0].data[series[0].data.length - 1]);
+                        setInterval(function () {
+                            $.getJSON('https://unitnetwork.net/file/eos.json')
+                                .done(function (volume_data) {
+                                    $.each(names, function (i, name) {
+                                        var last_prices = volume_data.true_money_flow[i][0];
+                                        if (series[i].data[series[i].data.length - 1].dataLabels != null) {
+                                            series[i].data[series[i].data.length - 1].dataLabels.enabled = false;
+                                        }
+                                        // console.debug(series[i].data[series[i].data.length - 1].dataLabels.enabled);
+                                        series[i].addPoint({ y: last_prices[last_prices.length - 1], dataLabels: { enabled: true } }, false, true);
+                                    })
+                                    chart.redraw();
+                                })
+                        }, 1000);
+                    }
+                }
+            },
+
+            legend: {
+                enabled: true,
+                verticalAlign: 'top',
+            },
+
+            rangeSelector: {
+                buttons: [{
+                    count: 1,
+                    type: 'minute',
+                    text: '1M'
+                }, {
+                    count: 3,
+                    type: 'minute',
+                    text: '3M'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false,
+                selected: 1
+            },
+
+            xAxis: {
+                type: 'datetime',
+                visible: false,
+            },
+
+            yAxis: [{
+                visible: false,
+                height: '30%',
+                gridLineWidth: 0,
+                // offset = 50,
+                allowDecimals: false,
+            }, {
+                visible: false,
+                top: '35%',
+                height: '30%',
+                gridLineWidth: 0,
+                // offset = 50,
+                allowDecimals: false,
+            }, {
+                visible: false,
+                top: '70%',
+                height: '30%',
+                gridLineWidth: 0,
+                // offset = 50,
+                allowDecimals: false,
+            }],
+
+            plotOptions: {
+                series: {
+                    pointStart: Date.now() - 5 * 60 * 1000,
+                    pointInterval: 1000,
+                    // compare: 'percent',
+                    showInNavigator: true,
+
+                    dataLabels: {
+                        align: 'left',
+                        crop: false,
+                        overflow: 'none',
+                        formatter: function () {
+                            if(Math.abs(this.y) > 10000)
+                                return ' $ ' + (this.y/10000).toPrecision(2) + '万';
+                            return ' $ ' + this.y.toPrecision(2);
+                        }
+                    },
+                }
+            },
+
+            tooltip: {
+                // pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
+                valueDecimals: 4,
+                split: true
+            },
+
+            series: volume_series
         });
 
     }
@@ -134,20 +255,27 @@
     $.getJSON('https://unitnetwork.net/file/eos.json', function (data) {
         var colors = ['#2f7ed8', '#8bbc21', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a']
         $.each(names, function (i, name) {
-            seriesOptions[i] = {
+            price_series[i] = {
                 name: name,
                 data: data.current_price_cash_value[i][0],
-                type: 'line',
-                // type: 'area',
+                type: 'spline',
                 color: colors[i],
-                // fillColor: {
-                //     linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
-                //     stops: [
-                //         [0, Highcharts.Color(colors[i]).setOpacity(0.8).get('rgba')],
-                //         [1, Highcharts.Color(colors[i]).setOpacity(0).get('rgba')]
-                //     ]
-                // },
-                // threshold: null,
+            };
+
+            volume_series[i] = {
+                name: name,
+                data: data.true_money_flow[i][0],
+                type: 'areaspline',
+                color: colors[i],
+                yAxis: i,
+                fillColor: {
+                    linearGradient: { x1: 1, y1: 0, x2: 1, y2: 1 },
+                    stops: [
+                        [0, Highcharts.Color(colors[i]).setOpacity(0.8).get('rgba')],
+                        [1, Highcharts.Color(colors[i]).setOpacity(0.01).get('rgba')]
+                    ]
+                },
+                threshold: null,
             };
 
             // As we're loading the data asynchronously, we don't know what order it will arrive. So
